@@ -41,7 +41,7 @@ public class UsuarioController {
 	@GetMapping("/{id}")
 	public ResponseEntity <Usuario> getById(@PathVariable Long id){
 		return usuarioRepository.findById(id) 
-				.map(res ->ResponseEntity.ok(res))
+				.map(resposta ->ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 		}
 	
@@ -49,21 +49,21 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario usuario) {
 
 		return usuarioService.cadastrarUsuario(usuario)
-			.map(res -> ResponseEntity.status(HttpStatus.CREATED).body(res))
+			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 	
 	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
 		return usuarioService.atualizarUsuario(usuario)
-			.map(res -> ResponseEntity.status(HttpStatus.OK).body(res))
+			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
 		return usuarioService.autenticarUsuario(usuarioLogin)
-			.map(res -> ResponseEntity.status(HttpStatus.OK).body(res))
+			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 }
