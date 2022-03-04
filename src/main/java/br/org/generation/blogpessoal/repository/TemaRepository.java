@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import br.org.generation.blogpessoal.model.Tema;
 
 @Repository
-public interface TemaRepository extends JpaRepository<Tema,Long>{
+public interface TemaRepository extends JpaRepository<Tema, Long>{
+    
+    public List <Tema> findAllByDescricaoContainingIgnoreCase (String descricao);
 
-	 List <Tema> findAllByDescricaoContainingIgnoreCase (String descricao);
+	public Optional<Tema> findByDescricao(String string);
+
 }
